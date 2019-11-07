@@ -7,7 +7,7 @@ const loginRouter = require('./route/loginRouter');
 const appRouter = require('./route/appRouter')
 const con = require("./util/database.js")
 
-const port = process.env.PORT || 8080;
+const port = process.env.SERVER_PORT|| 3000;
 
 // Using hbs template engine
 app.engine('hbs',expressHbs ({

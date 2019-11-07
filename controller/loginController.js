@@ -7,10 +7,19 @@ module.exports = {
 	},
 
 	login: (req, res) => {
-		db.getUser(req, data => {
-			if (data) return res.redirect('/landing')
-			return res.render('login', { pageTitle: 'People App', heading: 'Welcome to People App', validation: 'incorrect validation', loginCSS: true })
+		db.getUser(req, (err) => {
+			if (err) return res.render('login', { pageTitle: 'People App', heading: 'Welcome to People App', validation: err.message, loginCSS: true })
+			return res.redirect('/landing')
 		})
 	},
 
-}
+}	
+
+
+
+// login: (req, res) => {
+// 	db.getUser(req, (err, data) => {
+// 		if (data) 
+// 		return res.render('login', { pageTitle: 'People App', heading: 'Welcome to People App', validation: 'incorrect validation', loginCSS: true })
+// 	})
+// },
