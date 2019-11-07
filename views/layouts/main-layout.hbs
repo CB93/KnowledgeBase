@@ -2,32 +2,45 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>{{ pageTitle }}</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  {{#if loginCSS}}
-  <link href='/css/login.css' rel='stylesheet' />
-  {{/if}}
-  {{#if landingCSS}}
-  <link href='/css/landing.css' rel='stylesheet' />
-  {{/if}}
+	<meta charset="UTF-8">
+	<title>{{ pageTitle }}</title>
+	{{!-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link href='/css/layout.css' rel='stylesheet' />
+	{{#if loginCSS}}
+	<link href='/css/login.css' rel='stylesheet' />
+	{{/if}}
+	{{#if landingCSS}}
+	<link href='/css/landing.css' rel='stylesheet' />
+	{{/if}}
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">KnowledgeBase</a>
-      </div>
-      {{#if landingCSS}}
-      <form action="/" method="get">
-        <input type="submit" value="Logout" class="btn btn-light navbar-btn pull-right btn-md" role="button">
-      </form>
-      {{/if}}
-    </div>
-  </nav>
-  <main class="container pt-4">{{{body}}}</main>
+	<nav class="navbar navbar-expand-sm bg-primary justify-content-end">
+		<a id="navbar-main" class="navbar-brand">KnowledgeBase</a>
+		{{#if loginCSS}}
+		{{> loginPartial}}
+		<!-- Login Collapse Partial -->
+		{{/if}}
+		{{#if landingCSS}}
+		<!-- Logout Button -->
+		<div class="ml-auto mr-1">
+			<form action="/" method="get">
+				<input type="submit" value="Logout" class="btn btn-light btn-sm" role="button">
+			</form>
+		</div>
+		{{/if}}
+	</nav>
+
+	<main class="container pt-4">
+		{{{body}}}
+		<p id="error-field">{{validation}}</p>
+	</main>
+
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </html>
