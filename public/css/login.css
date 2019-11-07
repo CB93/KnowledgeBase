@@ -1,0 +1,14 @@
+#login-form {
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 45px;
+}
+
+#login-main {
+    padding-top: 30px;
+    text-align: center;
+}
+
+#error-field {
+    color: red;
+}
