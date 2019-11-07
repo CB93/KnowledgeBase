@@ -8,19 +8,17 @@ module.exports = {
 		req.con.query(`SELECT * FROM user WHERE name=?`, [username], (err, results) => {
 			if (err) {
 				callback(Error('Error from Database'))
-
 			} else {
 				if (results.length > 0) {
 					if (results[0].password == password) {
 						callback(null)
 					} else {
-						callback(Error('Email and Password does not match'))
+						callback(Error('Username and Password does not match'))
 					}
 				} else {
-					callback(Error("Email Does not exist"))
+					callback(Error("Username Does not exist"))
 				}
 			}
-
 		})
 	},
 }
