@@ -1,7 +1,14 @@
-#login-form {
+#register-form {
     width: 400px;
     margin: 0 auto;
     padding-top: 45px;
+}
+#formLogin{
+    padding: 15px; 
+    min-width:300px;
+    left: -232px;
+    top: 45px;
+    position: absolute;
 }
 
 #login-main {
@@ -12,3 +19,15 @@
 #error-field {
     color: red;
 }
+
+.dropdown-toggle {
+    margin-right: -10px;
+    color: white;
+}
+
+
+
+
+
+
+
