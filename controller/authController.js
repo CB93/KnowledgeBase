@@ -3,7 +3,7 @@ const db = require("../model/Knowledgebase")
 module.exports = {
 
 	index: (req, res) => {
-		return res.render('login', { pageTitle: 'People App', heading: 'Welcome to People App', loginCSS: true, validation: req.query.error });
+		return res.render('login', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', loginCSS: true, validation: req.query.error });
 	},
 
 	login: (req, res) => {
@@ -12,5 +12,9 @@ module.exports = {
 			return res.redirect('/landing')
 		})
 	},
+
+	register: (req, res) => {
+		console.log(req.body)
+	}
 }
 

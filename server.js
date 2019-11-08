@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const expressHbs = require('express-handlebars');
-const loginRouter = require('./route/loginRouter');
+const loginRouter = require('./route/authRouter');
 const appRouter = require('./route/appRouter')
 const con = require("./util/database.js")
 
