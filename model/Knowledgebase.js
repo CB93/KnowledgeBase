@@ -21,4 +21,18 @@ module.exports = {
 			}
 		})
 	},
+
+	registerUser: (req, callback) => {
+		req.con.query(`SELECT * FROM user WHERE name=?`, [username], (err, results) => {
+			if(err) {
+				callback(Error('Error from Database'))
+			} else {
+				if(!results.length) {
+					
+				} else {
+					callback(Error('Username already Exists'))
+				}
+			}
+		})
+	}
 }
