@@ -1,4 +1,4 @@
-const db = require("../model/Knowledgebase")
+const db = require("../model/auth")
 
 module.exports = {
 
@@ -8,13 +8,32 @@ module.exports = {
 
 	login: (req, res) => {
 		db.getUser(req, (err) => {
-			if (err) return res.redirect(`/?error=${err.message}`)
+			if (err) return res.render('login', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', loginCSS: true, validation: err.message });
 			return res.redirect('/landing')
 		})
 	},
 
 	register: (req, res) => {
-		console.log(req.body)
+
+		const password = req.body.password
+		const confirmPassword = req.body.confirmPassword
+
+		if (password != confirmPassword) {
+			return res.render('login', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', loginCSS: true, validation: 'Password must match your confirm password' })
+		}
+
+		db.emailCheck(req, (err, user) => {
+			if (err) throw err
+			if (user.length > 0) {
+				return res.render('login', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', loginCSS: true, validation: "User already exists" })
+			} else {
+
+				db.registerUser(req, (err, user) => {
+					if (err) throw err
+					return res.render('login', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', loginCSS: true, validation: "Account Created, you may sign in" })
+				})
+			}
+
+		})
 	}
 }
-

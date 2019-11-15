@@ -1,5 +1,3 @@
-const db = require("../model/Knowledgebase")
-
 module.exports = {
 
 	landing: (req, res) => {
