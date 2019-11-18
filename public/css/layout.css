@@ -2,6 +2,12 @@
   color: whitesmoke
 }
 
+.dropdown-toggle {
+  margin-right: -10px;
+  color: white;
+}
+
 #error-field {
   text-align: center;
+  color: red;
 }
