@@ -9,6 +9,7 @@ router.post("/login", authController.login);
 
 // Register routes
 router.post("/register", authController.register);
+router.get("/about", authController.about)
 
 // Posting routes
 router.post("/post", postController.post);
