@@ -1,0 +1,27 @@
+#about-form {
+  width: 400px;
+  margin: 0 auto;
+  padding-top: 45px;
+}
+#formLogin{
+  padding: 15px; 
+  min-width:300px;
+  left: -232px;
+  top: 45px;
+  position: absolute;
+}
+
+#about-main {
+  padding-top: 30px;
+  text-align: center;
+}
+
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #aaa;
+  margin-right: 0.5em;
+}
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
+}

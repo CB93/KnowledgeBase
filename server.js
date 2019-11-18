@@ -13,7 +13,7 @@ const port = process.env.SERVER_PORT|| 3000;
 app.engine('hbs',expressHbs ({
       defaultLayout: 'main-layout',
       layoutsDir: 'views/layouts/',
-      partialsDir: 'views/partials',
+      partialsDir: ['views/partials/app', 'views/partials/auth'],
       extname: 'hbs'
     })
   );
