@@ -1,5 +1,5 @@
-#register-form {
-    width: 400px;
+#register-area {
+    width: 800px;
     margin: 0 auto;
     padding-top: 45px;
 }
@@ -11,9 +11,12 @@
     position: absolute;
 }
 
-#register-main {
-    padding-top: 30px;
-    text-align: center;
+.photo-col {
+    width: 600px;
+}
+
+img {
+    width: 100%;
 }
 
 

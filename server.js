@@ -1,14 +1,12 @@
 const express = require('express')
 const app = express();
 const bodyParser = require('body-parser');
-const path = require('path');
 const expressHbs = require('express-handlebars');
 const loginRouter = require('./route/authRouter');
 const appRouter = require('./route/appRouter')
 const con = require("./util/database.js")
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
 
 const port = process.env.SERVER_PORT|| 3000;
 
@@ -43,10 +41,6 @@ app.use(bodyParser.urlencoded({ extended: false })) // middleware
 app.use(bodyParser.json()) // middleware
 app.use(loginRouter);
 app.use(appRouter)
-app.use(express.static(path.join(__dirname,'public')));
-
-
-
-
+app.use(express.static(__dirname + '/public'));
 
 app.listen(port, () => console.log('Server ready'))
