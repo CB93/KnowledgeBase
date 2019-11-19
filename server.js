@@ -5,6 +5,9 @@ const expressHbs = require('express-handlebars');
 const loginRouter = require('./route/authRouter');
 const appRouter = require('./route/appRouter')
 const con = require("./util/database.js")
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const port = process.env.SERVER_PORT|| 3000;
 
 // Using hbs template engine
@@ -23,6 +26,16 @@ app.use(function(req, res, next) {
   req.con = con
   next()
 })
+
+app.use(cookieParser());
+app.use(session(
+  {
+    secret: 'keyboard cat',
+    resave: false, 
+    saveUninitialized: false
+  }
+  ))
+
 
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 app.use(bodyParser.json()) // middleware
