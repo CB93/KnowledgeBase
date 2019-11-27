@@ -2,7 +2,17 @@
     <div id='landing-main'>
         <h1>{{heading}}</h1>
     </div>
-    <div id="post-form">
-        {{> postPartial}}
+    <div class="row">
+        <div class="col-md-2">
+            {{> profileCardPartial userDetails=user }}
+        </div>
+        <div class="col-md-10">
+            <div class="post-area">
+                <h2>Whats your question today?</h2>
+                <div id="post-form">
+                    {{> postPartial}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
