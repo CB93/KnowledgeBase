@@ -7,8 +7,10 @@ module.exports = {
 	},
 
 	login: (req, res) => {
-		db.getUser(req, (err) => {
+		db.getUser(req, (err,user) => {
 			if (err) return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true });
+
+			req.session.email = user[0].name
 			return res.redirect('/landing')
 		})
 	},

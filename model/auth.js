@@ -2,16 +2,16 @@ module.exports = {
 
 	getUser: (req, callback) => {
 
-		const username = req.body.username
+		const email = req.body.email
 		const password = req.body.password
 
-		req.con.query(`SELECT * FROM user WHERE name=?`, [username], (err, results) => {
+		req.con.query(`SELECT * FROM user WHERE name=?`, [email], (err, results) => {
 			if (err) {
 				callback(Error('Error from Database'))
 			} else {
 				if (results.length > 0) {
 					if (results[0].password == password) {
-						callback(null)
+						callback(null, results)
 					} else {
 						callback(Error('Username and Password does not match'))
 					}
@@ -27,15 +27,15 @@ module.exports = {
 			if (err) {
 				callback(Error('Error from Database'))
 			} else {
-				callback(null,results)
+				callback(null, results)
 			}
 		})
 	},
 
 	registerUser: (req, callback) => {
 		// userId is auto incremented in DB
-		const newUser =  {
-			name: req.session.email, 
+		const newUser = {
+			name: req.session.email,
 			password: req.session.password,
 			firstname: req.session.firstName,
 			lastname: req.session.lastName,
@@ -43,14 +43,14 @@ module.exports = {
 			about: req.body.about,
 			imageurl: req.body.url,
 			birthday: req.body.birthday
-			}
+		}
 
 		req.con.query(`Insert INTO user SET ?`, [newUser], (err, results) => {
 			if (err) {
 				callback(Error('Error from Database'))
 			} else {
 				callback(null)
-				
+
 			}
 		})
 	},

@@ -8,7 +8,7 @@ module.exports = {
 			if (err) throw err;
 			else {
 				const userDetail = userDetails[0]
-				
+				console.log(userDetails)
 				return res.render('landing', { user: userDetail, landingCSS: true })
 			}
 		})

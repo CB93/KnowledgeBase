@@ -36,9 +36,8 @@ h4{
 
 .card img {
     width:150px;
-    height: 120px;
+    height: 150px;
     border-radius: 50%;
-    border:0.4px solid black;
 }
 
 .name  {
