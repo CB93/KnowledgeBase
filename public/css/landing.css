@@ -9,8 +9,15 @@ h4{
 
 #post-form {
     margin-top: 10%;
-    margin-left: 30%;
-    margin-right: 30%;
+}
+
+.post-area {
+    max-width: 600px;
+    margin: auto;
+}
+
+.card-area {
+    margin-top: 10%;
 }
 
 #post-box {
@@ -25,4 +32,25 @@ h4{
     float: left;
     width: 60px;
     font-size: 16px;
+}
+
+.card img {
+    width:150px;
+    height: 120px;
+    border-radius: 50%;
+    border:0.4px solid black;
+}
+
+.name  {
+    padding-top:15px;
+    word-spacing: 4px;
+    padding-bottom:5px;
+
+}
+.middle-profile {
+    margin-top: 40px;
+
+}
+.lower-profile{
+    margin-top: 30px;
 }
