@@ -15,5 +15,6 @@ router.get("/about", authController.about)
 // Posting routes
 router.post("/post", postController.post);
 
+//DM routes
 router.post("/message", messageController.sendMessage);
 module.exports = router;

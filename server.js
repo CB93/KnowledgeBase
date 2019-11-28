@@ -20,19 +20,11 @@ io.on("connection", (socket) => {
     });
 
     socket.on("private-message", (data) => {
-        socket.broadcast.to(data.room).emit("retrieve-private-message", {
+        socket.broadcast.to(data.room).emit("private-message-retrieval", {
             message: data.message
         });
     });
 });
-
-
-
-//io.on("connection", socket => {
-//    socket.on("send-message", (message) => {
-//        socket.broadcast.emit("private-message", message);
-//    });
-//});
 
 // Using hbs template engine
 app.engine('hbs',expressHbs ({
