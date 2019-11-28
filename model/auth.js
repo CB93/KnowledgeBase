@@ -1,9 +1,11 @@
+const sha1 = require("sha1");
+
 module.exports = {
 
 	getUser: (req, callback) => {
 
 		const email = req.body.email
-		const password = req.body.password
+        const password = sha1(req.body.password);
 
 		req.con.query(`SELECT * FROM user WHERE name=?`, [email], (err, results) => {
 			if (err) {
@@ -36,7 +38,7 @@ module.exports = {
 		// userId is auto incremented in DB
 		const newUser = {
 			name: req.session.email,
-			password: req.session.password,
+			password: sha1(req.session.password),
 			firstname: req.session.firstName,
 			lastname: req.session.lastName,
 			country: req.body.country,
