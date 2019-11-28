@@ -7,8 +7,32 @@ const appRouter = require('./route/appRouter')
 const con = require("./util/database.js")
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
+const io = require("socket.io")(5000);
 const port = process.env.SERVER_PORT|| 3000;
+
+io.on("connection", (socket) => {
+    socket.on("leave", (conversation) => {
+        socket.leave(conversation);
+    });
+
+    socket.on("join", (conversation) => {
+        socket.join(conversation);
+    });
+
+    socket.on("private-message", (data) => {
+        socket.broadcast.to(data.room).emit("retrieve-private-message", {
+            message: data.message
+        });
+    });
+});
+
+
+
+//io.on("connection", socket => {
+//    socket.on("send-message", (message) => {
+//        socket.broadcast.emit("private-message", message);
+//    });
+//});
 
 // Using hbs template engine
 app.engine('hbs',expressHbs ({

@@ -33,6 +33,9 @@ module.exports = {
 	// 			})
 	// 		}
 	// 	})
+    //},
 
-	// }
+    messaging: (req, res) => {
+        return res.render('messaging', {messagingCSS: true});
+    }
 }
