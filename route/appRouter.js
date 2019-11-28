@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const authorize = require("../public/js/authorization");
 const appController = require("../controller/appController")
 
-router.get("/landing", appController.landing)
+router.get("/landing", authorize, appController.landing)
 
 // router.get("/profile", appController.userProfile)
 
-router.get("/messaging", appController.messaging);
+router.get("/messaging", authorize, appController.messaging);
 
 module.exports = router;

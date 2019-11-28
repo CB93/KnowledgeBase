@@ -50,8 +50,7 @@ app.use(session(
     resave: false, 
     saveUninitialized: false
   }
-  ))
-
+))
 
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 app.use(bodyParser.json()) // middleware
