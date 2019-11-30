@@ -1,0 +1,50 @@
+module.exports = {
+    sendMessage: (req, callback) => {
+        const userId = req.session.userId;
+        const message = req.body.message;
+        const conversation = req.body.conversation;
+
+		req.con.query(`INSERT INTO messages (text, sender, conversation) VALUES ("${req.body.message}", "${req.session.userId}", "${conversation}")`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+
+        req.con.query(`select firstname, lastname, imageurl from user where user.iduser = ${userId}`, (err, results) => {
+            if (err) console.log(err);
+            callback(err, results);
+        });
+    },
+
+    getMessages: (req, callback) => {
+        const convo = req.params.conversationId;
+
+        req.con.query(`select text, messages.sender, recipient, firstname, lastname, imageurl from messages join conversations join user on messages.conversation = conversations.id and messages.sender = user.iduser
+        where conversations.id = ${convo}`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback(`Unable to fetch messages for conversation with id ${convo}`);
+            }
+            callback(null, results);
+        });
+    },
+
+    getConversations: (req, callback) => {
+        const userId = req.session.userId;
+
+        req.con.query(`select * from
+        (select id, sender_id, recipient_id, sender_pic, sender_fn, sender_ln, recipient_pic, recipient_fn, recipient_ln from
+        (select id, sender, recipient, imageurl as sender_pic, iduser as sender_id, firstname as sender_fn, lastname as sender_ln from conversations join user on conversations.sender = user.iduser) as a
+        join
+    (select iduser as recipient_id, imageurl as recipient_pic, firstname as recipient_fn, lastname as recipient_ln from user) as b
+        on a.recipient = b.recipient_id) as c
+        where sender_id = ${userId} or recipient_id = ${userId}`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to fetch conversations.");
+            }
+            const data  = {convo: results, user: req.session.userId};
+            callback(null, data);
+        });
+    }
+};

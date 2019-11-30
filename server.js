@@ -7,8 +7,28 @@ const appRouter = require('./route/appRouter')
 const con = require("./util/database.js")
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
+const io = require("socket.io")(5000);
 const port = process.env.SERVER_PORT|| 3000;
+
+io.on("connection", (socket) => {
+    socket.on("leave", (conversation) => {
+        socket.leave(conversation);
+    });
+
+    socket.on("join", (conversation) => {
+        socket.join(conversation);
+    });
+
+    socket.on("private-message", (data) => {
+        console.log(data);
+        socket.broadcast.to(data.room).emit("private-message-retrieval", {
+            text: data.message,
+            firstname: data.user[0].firstname,
+            lastname: data.user[0].lastname,
+            imageurl: data.user[0].imageurl
+        });
+    });
+});
 
 // Using hbs template engine
 app.engine('hbs',expressHbs ({
@@ -28,14 +48,11 @@ app.use(function(req, res, next) {
 })
 
 app.use(cookieParser());
-app.use(session(
-  {
+app.use(session({
     secret: 'keyboard cat',
     resave: false, 
     saveUninitialized: false
-  }
-  ))
-
+}));
 
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 app.use(bodyParser.json()) // middleware

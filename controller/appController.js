@@ -1,4 +1,5 @@
-const db = require("../model/app")
+const db = require("../model/app");
+const dbMessage = require("../model/message");
 
 module.exports = {
 
@@ -33,6 +34,9 @@ module.exports = {
 	// 			})
 	// 		}
 	// 	})
+    //},
 
-	// }
+    messaging: async (req, res) => {
+        return res.render('messaging', {messagingCSS: true});
+    }
 }

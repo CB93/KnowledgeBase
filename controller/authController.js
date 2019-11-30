@@ -1,16 +1,23 @@
-const db = require("../model/auth")
+const db = require("../model/auth");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
 
-	index: (req, res) => {
+    index: (req, res) => {
+        req.session.email = null;
+        req.session.user = null;
+        req.session.token = null;
 		return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: req.query.error, login: true });
 	},
 
 	login: (req, res) => {
 		db.getUser(req, (err,user) => {
-			if (err) return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true });
+            if (err) return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true });
 
-			req.session.email = user[0].name
+            const token = jwt.sign({user: user[0].iduser, name: user[0].name}, process.env.JWT_SECRET);
+            req.session.email = user[0].name;
+            req.session.userId = user[0].iduser;
+            req.session.token = token;
 			return res.redirect('/landing')
 		})
 	},
