@@ -10,6 +10,8 @@
     border-style: solid hidden solid solid;
     border-width: 1px;
     border-color: rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #user-card {
@@ -72,4 +74,10 @@
 #send-button {
     height: 30px;
     width: 18%;
+}
+
+#convo-box {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px;
 }

@@ -20,8 +20,12 @@ io.on("connection", (socket) => {
     });
 
     socket.on("private-message", (data) => {
+        console.log(data);
         socket.broadcast.to(data.room).emit("private-message-retrieval", {
-            message: data.message
+            text: data.message,
+            firstname: data.user[0].firstname,
+            lastname: data.user[0].lastname,
+            imageurl: data.user[0].imageurl
         });
     });
 });
@@ -44,13 +48,11 @@ app.use(function(req, res, next) {
 })
 
 app.use(cookieParser());
-app.use(session(
-  {
+app.use(session({
     secret: 'keyboard cat',
     resave: false, 
     saveUninitialized: false
-  }
-))
+}));
 
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 app.use(bodyParser.json()) // middleware

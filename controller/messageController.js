@@ -2,9 +2,23 @@ const db = require("../model/message")
 
 module.exports = {
     sendMessage: (req, res) => {
-        db.sendMessage(req, (err) => {
-            res.sendStatus(500);
+        db.sendMessage(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+            res.json(results);
         });
-        res.sendStatus(200);
     },
+
+    getMessages: (req, res) => {
+        db.getMessages(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+            return res.json(results);
+        })
+    },
+
+    getConversations: (req, res) => {
+        db.getConversations(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+            return res.json(results);
+        });
+    }
 }

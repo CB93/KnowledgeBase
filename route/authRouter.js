@@ -12,11 +12,13 @@ router.post("/login", authController.login);
 
 // Register routes
 router.post("/register", authController.register);
-router.get("/about", authController.about)
+router.get("/about", authController.about);
 
 // Posting routes
 router.post("/post", authorize, postController.post);
 
 //DM routes
 router.post("/message", authorize, messageController.sendMessage);
+router.get("/conversations", authorize, messageController.getConversations);
+router.get("/message/:conversationId", authorize, messageController.getMessages);
 module.exports = router;
