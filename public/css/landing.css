@@ -133,3 +133,33 @@ h4{
     opacity: 0.3;
     cursor: pointer;
 }
+
+.discussion-reply {
+}
+
+.discussion-reply-profile-pic {
+    margin: 40px 20px 40px 40px;
+    float: left;
+}
+
+.discussion-reply-content {
+    margin: 40px 40px 40px 20px;
+    text-align: left;
+}
+
+.comment-textarea {
+    resize: none;
+    width: 90%;
+    height: 200px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.comment-btn {
+    float: right;
+    margin-bottom: 30px;
+}
+
+.comment-btn-container {
+    margin: 0px 40px 0px 40px;
+}

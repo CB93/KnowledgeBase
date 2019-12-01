@@ -28,5 +28,12 @@ module.exports = {
             if (err) return res.sendStatus(500);
             return res.json(results);
         });
+    },
+
+    postReply: (req, res) => {
+        db.postReply(req, (err) => {
+            if (err) return res.sendStatus(500);
+        });
+        return res.sendStatus(200);
     }
 };

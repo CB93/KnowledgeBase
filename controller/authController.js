@@ -18,7 +18,6 @@ module.exports = {
             req.session.email = user[0].name;
             req.session.userId = user[0].iduser;
             req.session.token = token;
-            req.session.pagination = 0;
 			return res.redirect('/landing')
 		})
 	},

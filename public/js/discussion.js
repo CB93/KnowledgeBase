@@ -13,10 +13,9 @@ renderPosts = async (pagination) => {
         },
     });
 
-    const data = await response.json();
-    console.log(data)
+    const posts = await response.json();
 
-    data.forEach((post) => {
+    posts.forEach((post) => {
         const discussionCard = document.createElement("div");
         const toggleContainer = document.createElement("div");
         const postInfo = document.createElement("div");
@@ -32,7 +31,7 @@ renderPosts = async (pagination) => {
         const replies = document.createElement("h6");
         const replyCollapseContainer = document.createElement("div");
 
-        discussionCard.className = "discussion-card card";
+        discussionCard.className = "discussion-tard card";
         postInfo.className = "row";
         textContainer.className = "row";
         text.className = "discussion-text";
@@ -50,11 +49,9 @@ renderPosts = async (pagination) => {
         replies.setAttribute("aria-expanded", false);
         replies.setAttribute("aria-controls", `collapse-${post.id}`);
         replies.setAttribute("href", `#collapse-${post.id}`);
+        replies.onclick = () => { renderReplies(post.id); };
         replyCollapseContainer.id = `collapse-${post.id}`;
         replyCollapseContainer.className = "collapse";
-        var s = document.createElement("p");
-        s.innerText = "asdf"//TODO --- display replies
-        replyCollapseContainer.append(s);
         
         discussionCard.append(postInfo);
         discussionCard.append(textContainer);
@@ -75,7 +72,7 @@ renderPosts = async (pagination) => {
         topic.innerText = post.topic;
         text.innerText = post.content;
         date.innerText = post.date.split("T")[0];
-        replies.innerText = "replies";
+        replies.innerText = `${post.replies} replies`;
 
         latestPostContainer.append(discussionCard);
     });
@@ -90,6 +87,11 @@ renderPreviousPage = async (pagination) => {
 };
 
 renderReplies = async (post) => {
+    const repliesContainer = document.getElementById(`collapse-${post}`);
+
+    while (repliesContainer.firstChild)
+        repliesContainer.removeChild(repliesContainer.firstChild);
+
     const response = await fetch(`http://localhost:3000/post/${post}/replies`, {
         method: "GET",
         mode: "cors",
@@ -99,10 +101,67 @@ renderReplies = async (post) => {
         },
     });
 
+    const replies = await response.json();
+
+    replies.forEach((reply) => {
+        const replyContainer = document.createElement("div");
+        const profilePic = document.createElement("img");
+        const replyContent = document.createElement("p");
+        const profilePicContainer = document.createElement("div");
+        const replyContentContainer = document.createElement("div");
+
+        replyContainer.className = "row discussion-reply";
+        profilePicContainer.className = "col-sm-3";
+        replyContentContainer.className = "col-sm-9";
+        profilePic.className = "discussion-reply-profile-pic";
+        replyContent.className = "discussion-reply-content";
+        profilePic.style.width = "100px";
+        profilePic.style.height = "100px";
+        
+        profilePicContainer.append(profilePic);
+        replyContentContainer.append(replyContent);
+        replyContainer.append(profilePicContainer);
+        replyContainer.append(replyContentContainer);
+
+        replyContent.innerText = reply.reply_content;
+        profilePic.src = reply.imageurl;
+
+        repliesContainer.append(replyContainer);
+    });
+
+    const commentContainer = document.createElement("comment-container");
+    const commentBtnContainer = document.createElement("div");
+    const commentTextarea = document.createElement("textarea");
+    const commentBtn = document.createElement("button");
+    
+    commentTextarea.className = "comment-textarea";
+    commentBtn.className = "comment-btn btn btn-success btn-sm";
+    commentBtnContainer.className = "comment-btn-container";
+    commentBtn.innerText = "Comment";
+    
+    commentContainer.append(commentTextarea);
+    commentBtnContainer.append(commentBtn);
+    commentContainer.append(commentBtnContainer);
+
+    commentBtn.onclick = () => { createReply(post, commentTextarea.value); commentTextarea.value = ""};
+
+    repliesContainer.append(commentContainer);
 };
 
-toggleReplies = () => {
+createReply = async (post, content) => {
+    const response = await fetch("http://localhost:3000/post/reply", {
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({postId: post, content: content})
+    });
 
-}
+    if (response.status == 200) {
+        renderReplies(post);
+    }
+};
 
 renderPosts(0);

@@ -3,7 +3,8 @@ const dbMessage = require("../model/message");
 
 module.exports = {
 
-	landing: (req, res) => {
+    landing: (req, res) => {
+        req.session.pagination = 0;
 
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
