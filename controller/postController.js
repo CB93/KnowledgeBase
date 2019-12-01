@@ -21,5 +21,12 @@ module.exports = {
 
             return res.json(results);
         });
+    },
+
+    getReplies: (req, res) => {
+        db.getReplies(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+            return res.json(results);
+        });
     }
 };

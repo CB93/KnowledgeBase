@@ -67,14 +67,26 @@ renderPosts = async (pagination) => {
 
         latestPostContainer.append(discussionCard);
     });
-}
+};
 
 renderNextPage = async (pagination) => {
     renderPosts(1);
-}
+};
 
 renderPreviousPage = async (pagination) => {
     renderPosts(-1);
-}
+};
+
+renderReplies = (post) => {
+    const response = await fetch(`http://localhost:3000/post/${post}/replies`, {
+        method: "GET",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+
+};
 
 renderPosts(0);

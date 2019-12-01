@@ -28,4 +28,19 @@ module.exports = {
             callback(null, results);
         })
     },
+
+    getReplies: (req, callback) => {
+        const postId = req.params.postId;
+
+        req.con.query(`select reply_id, reply_content, firstname, lastname, imageurl from
+        (select replies.id as reply_id, replies.content as reply_content, replier 
+            from replies join posts on replies.post = posts.id where posts.id = ${postId}) as a
+        join user on replier = user.iduser`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to fetch replies");
+            }
+            callback(null, results);
+        });
+    }
 }
