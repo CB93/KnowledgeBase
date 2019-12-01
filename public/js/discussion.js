@@ -14,6 +14,7 @@ renderPosts = async (pagination) => {
     });
 
     const data = await response.json();
+    console.log(data)
 
     data.forEach((post) => {
         const discussionCard = document.createElement("div");
@@ -29,6 +30,7 @@ renderPosts = async (pagination) => {
         const topic = document.createElement("h5");
         const date = document.createElement("h6");
         const replies = document.createElement("h6");
+        const replyCollapseContainer = document.createElement("div");
 
         discussionCard.className = "discussion-card card";
         postInfo.className = "row";
@@ -43,11 +45,21 @@ renderPosts = async (pagination) => {
         toggleContainer.className = "reply-toggle-container"
         date.className = "post-time-stamp";
         replies.className = "discussion-replies";
-
-
+        replies.dataset.toggle = "collapse";
+        replies.role = "button";
+        replies.setAttribute("aria-expanded", false);
+        replies.setAttribute("aria-controls", `collapse-${post.id}`);
+        replies.setAttribute("href", `#collapse-${post.id}`);
+        replyCollapseContainer.id = `collapse-${post.id}`;
+        replyCollapseContainer.className = "collapse";
+        var s = document.createElement("p");
+        s.innerText = "asdf"//TODO --- display replies
+        replyCollapseContainer.append(s);
+        
         discussionCard.append(postInfo);
         discussionCard.append(textContainer);
         discussionCard.append(toggleContainer);
+        discussionCard.append(replyCollapseContainer);
         postInfo.append(profilePicContainer);
         postInfo.append(subjectContainer);
         postInfo.append(topicContainer);
@@ -77,7 +89,7 @@ renderPreviousPage = async (pagination) => {
     renderPosts(-1);
 };
 
-renderReplies = (post) => {
+renderReplies = async (post) => {
     const response = await fetch(`http://localhost:3000/post/${post}/replies`, {
         method: "GET",
         mode: "cors",
@@ -88,5 +100,9 @@ renderReplies = (post) => {
     });
 
 };
+
+toggleReplies = () => {
+
+}
 
 renderPosts(0);
