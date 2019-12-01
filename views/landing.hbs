@@ -13,6 +13,18 @@
                     {{> postPartial}}
                 </div>
             </div>
+            <div id="discussion-area">
+                <h3 id="discussion-header">Latest Discussions</h3>
+                {{> discussionPartial}}
+                <div class="row" id="discussion-btn-pagination">
+                    <div class="col-sm-6">
+                        <button id="prev-btn" class="btn btn-success btn-sm" onclick="renderPreviousPage()">Previous</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button id="next-btn" class="btn btn-success btn-sm" onclick="renderNextPage()">Next</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

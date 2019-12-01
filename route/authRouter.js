@@ -16,6 +16,7 @@ router.get("/about", authController.about);
 
 // Posting routes
 router.post("/post", authorize, postController.post);
+router.get("/post/:pagination", postController.getPosts);
 
 //DM routes
 router.post("/message", authorize, messageController.sendMessage);

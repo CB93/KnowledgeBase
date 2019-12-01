@@ -4,9 +4,22 @@ module.exports = {
 
     post: (req, res) => {
         db.post(req, (err) => {
-            //TODO --- handle error later
-            res.redirect("/landing");
+            if (err) return res.sendStatus(500);
         });
+
+        return res.status(200).redirect("/landing");
     },
 
-}
+    getPosts: (req, res) => {
+        db.getPosts(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+
+            if (!results.length) {
+                req.session.pagination = 0;
+                return res.sendStatus(200);
+            }
+
+            return res.json(results);
+        });
+    }
+};
