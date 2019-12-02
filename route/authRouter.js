@@ -4,6 +4,7 @@ const authorize = require("../public/js/authorization");
 const authController = require("../controller/authController");
 const postController = require("../controller/postController");
 const messageController = require("../controller/messageController");
+const profileController = require("../controller/profileController");
 
 
 // Login routes
@@ -25,3 +26,9 @@ router.post("/message", authorize, messageController.sendMessage);
 router.get("/conversations", authorize, messageController.getConversations);
 router.get("/message/:conversationId", authorize, messageController.getMessages);
 module.exports = router;
+
+//Harpreet --- User Profile
+router.get("/profile", authorize, profileController.displayUserProfile);
+
+
+

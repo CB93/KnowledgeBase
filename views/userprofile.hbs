@@ -1,8 +1,27 @@
-Profile Page
-<br>
-<br>
-Email: {{{email}}} <br>
-FirstName: {{{firstName}}}<br>
-LastName: {{{lastName}}}<br>
-About: {{{about}}}<br>
-Image URl: {{{imageUrl}}}<br>
+
+<div id = 'left-side-div'>
+   <img id = 'user-image' src = "https://randomuser.me/api/portraits/med/men/3.jpg">
+   <div id ='user-name'>Kevin Hudson</div>
+   <div id = 'user-about'>About</div>
+   <div id = 'user-country'>Canada</div>
+</div>
+
+<div id = 'right-side-div'>
+    <button id = 'message-btn'>Message</button>
+    <div id = 'number-of-likes'>5 Likes
+        <button id = 'like-option'>+</button>
+    </div>
+    <div id = 'number-of-posts'>2 Posts</div>
+</div>
+
+<div id ='center-side-div'>
+    <div id = 'center-heading'>ALL posts by Kevin</div>
+    <div id = 'user-post'>
+        <img id= 'user-post-image' src = 'https://randomuser.me/api/portraits/med/men/3.jpg'>
+        <div id = 'user-post-subject'></div>
+        <div id = 'user-post-topic'></div>
+        <div id = 'user-post-topic'></div>
+    </div>
+</div>
+
+{{!-- {{> profileCardPartial}} --}}

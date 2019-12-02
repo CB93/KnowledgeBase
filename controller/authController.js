@@ -12,12 +12,17 @@ module.exports = {
 
 	login: (req, res) => {
 		db.getUser(req, (err,user) => {
-            if (err) return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true });
+			if (err) {
+				
+				return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true });
+		}
 
             const token = jwt.sign({user: user[0].iduser, name: user[0].name}, process.env.JWT_SECRET);
             req.session.email = user[0].name;
             req.session.userId = user[0].iduser;
-            req.session.token = token;
+			req.session.token = token;
+			req.session.userDetails = user[0]
+			console.log(user[0].name)
 			return res.redirect('/landing')
 		})
 	},
