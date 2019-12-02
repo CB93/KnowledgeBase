@@ -13,6 +13,17 @@ module.exports = {
 		})
 	},
 
+	fetchProfileDetails: (req, callback) => {
+		const userId = req.params.id 
+		req.con.query(`SELECT * FROM user WHERE iduser=?`, [userId], (err, results) => {
+			if (err) {
+				callback(Error('Error from Database'))
+			} else {
+				callback(null, results)
+			}
+		})
+	},
+
 	editProfile: (req, callback) => {
 		Object.keys(req.body).forEach(k => (!req.body[k] && req.body[k] !== undefined) && delete req.body[k]);
 

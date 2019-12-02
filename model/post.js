@@ -18,7 +18,7 @@ module.exports = {
         req.session.pagination = parseInt(req.session.pagination, 10) < 0 ? 
                                  0 : parseInt(req.session.pagination, 10) + parseInt(req.params.pagination, 10);
 
-        req.con.query(`select id, subject, content, topic, firstname, lastname, imageurl, posts.date, posts.replies from posts join user on posts.creator = user.iduser order by posts.date desc limit ${5 * req.session.pagination}, 5`, (err, results) => {
+        req.con.query(`select id, subject, content, topic,iduser, firstname, lastname, imageurl, posts.date, posts.replies from posts join user on posts.creator = user.iduser order by posts.date desc limit ${5 * req.session.pagination}, 5`, (err, results) => {
             if (err) {
                 console.log(err);
                 callback("Unable to fetch discussion/posts.");
@@ -30,7 +30,7 @@ module.exports = {
     getReplies: (req, callback) => {
         const postId = req.params.postId;
 
-        req.con.query(`select reply_id, reply_content, firstname, lastname, imageurl from
+        req.con.query(`select iduser, reply_id, reply_content, firstname, lastname, imageurl from
         (select replies.id as reply_id, replies.content as reply_content, replier 
             from replies join posts on replies.post = posts.id where posts.id = ${postId}) as a
         join user on replier = user.iduser`, (err, results) => {
