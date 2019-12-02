@@ -3,8 +3,8 @@ const dbMessage = require("../model/message");
 
 module.exports = {
 
-    landing: (req, res) => {
-        req.session.pagination = 0;
+	landing: (req, res) => {
+		req.session.pagination = 0;
 
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
@@ -15,29 +15,19 @@ module.exports = {
 			}
 		})
 	},
-	// userProfile:(req,res) => {
 
-	// 	db.getUserDetails(req, (err, userDetails) => {
-	// 		if (err) throw err;
-	// 		else {
-	// 		const email = userDetails[0].name
-	// 		const firstName = userDetails[0].firstname
-	// 		const lastName = userDetails[0].lastname
-	// 		const about = userDetails[0].lines
-	// 		const imageUrl = userDetails[0].imageurl
+	editProfile: (req, res) => {
+		db.editProfile(req, (err) => {
+			if (err) throw err;
+			else {
+				return res.redirect('/landing')
+			}
+		})
 
-	// 		return res.render('userprofile', {
-	// 			email: email,
-	// 			firstName: firstName,
-	// 			lastName:lastName,
-	// 			about: about,
-	// 			imageUrl:imageUrl
-	// 			})
-	// 		}
-	// 	})
-    //},
+	},
 
-    messaging: async (req, res) => {
-        return res.render('messaging', {messagingCSS: true});
-    }
+
+	messaging: async (req, res) => {
+		return res.render('messaging', { messagingCSS: true });
+	}
 }
