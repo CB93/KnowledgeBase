@@ -11,8 +11,9 @@ module.exports = {
 			if (err) {
 				callback(Error('Error from Database'))
 			} else {
+				console.log(password)
 				if (results.length > 0) {
-					if (results[0].password == password) {
+					if (results[0].password === password) {
 						callback(null, results)
 					} else {
 						callback(Error('Username and Password does not match'))

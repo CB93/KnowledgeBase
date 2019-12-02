@@ -9,8 +9,10 @@ module.exports = {
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
 			else {
+				
+				req.session.userDetails = userDetails[0]
 				const userDetail = userDetails[0]
-				console.log(userDetails)
+
 				return res.render('landing', { user: userDetail, landingCSS: true })
 			}
 		})
