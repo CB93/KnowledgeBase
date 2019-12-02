@@ -74,19 +74,24 @@ h4{
     padding-top:15px;
     word-spacing: 4px;
     padding-bottom:5px;
-
 }
 
 .middle-profile {
     margin-top: 40px;
-
 }
 
 .lower-profile{
     margin-top: 30px;
 }
 
-.discussion-card {
+.card  p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.card li:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .poster-profile-pic {
@@ -132,9 +137,6 @@ h4{
 .discussion-replies:hover {
     opacity: 0.3;
     cursor: pointer;
-}
-
-.discussion-reply {
 }
 
 .discussion-reply-profile-pic {
