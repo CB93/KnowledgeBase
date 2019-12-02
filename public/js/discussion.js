@@ -1,7 +1,7 @@
 const latestPostContainer = document.getElementById("latest-post-container");
 
 renderPosts = async (pagination) => {
-    while(latestPostContainer.firstChild)
+    while (latestPostContainer.firstChild)
         latestPostContainer.removeChild(latestPostContainer.firstChild);
 
     const response = await fetch(`http://localhost:3000/post/${pagination}`, {
@@ -14,7 +14,6 @@ renderPosts = async (pagination) => {
     });
 
     const posts = await response.json();
-
     posts.forEach((post) => {
         const discussionCard = document.createElement("div");
         const toggleContainer = document.createElement("div");
@@ -52,7 +51,7 @@ renderPosts = async (pagination) => {
         replies.onclick = () => { renderReplies(post.id); };
         replyCollapseContainer.id = `collapse-${post.id}`;
         replyCollapseContainer.className = "collapse";
-        
+
         discussionCard.append(postInfo);
         discussionCard.append(textContainer);
         discussionCard.append(toggleContainer);
@@ -68,6 +67,12 @@ renderPosts = async (pagination) => {
         toggleContainer.append(replies);
 
         profilePic.src = post.imageurl;
+
+        profilePic.onclick = function (e) {
+            window.location.replace(`/profile/${post.iduser}`);
+        }
+
+
         subject.innerText = post.subject;
         topic.innerText = post.topic;
         text.innerText = post.content;
@@ -117,7 +122,7 @@ renderReplies = async (post) => {
         replyContent.className = "discussion-reply-content";
         profilePic.style.width = "100px";
         profilePic.style.height = "100px";
-        
+
         profilePicContainer.append(profilePic);
         replyContentContainer.append(replyContent);
         replyContainer.append(profilePicContainer);
@@ -126,6 +131,13 @@ renderReplies = async (post) => {
         replyContent.innerText = reply.reply_content;
         profilePic.src = reply.imageurl;
 
+
+        profilePic.onclick = function (e) {
+            window.location.replace(`/profile/${reply.iduser}`);
+        }
+
+
+
         repliesContainer.append(replyContainer);
     });
 
@@ -133,17 +145,17 @@ renderReplies = async (post) => {
     const commentBtnContainer = document.createElement("div");
     const commentTextarea = document.createElement("textarea");
     const commentBtn = document.createElement("button");
-    
+
     commentTextarea.className = "comment-textarea";
     commentBtn.className = "comment-btn btn btn-success btn-sm";
     commentBtnContainer.className = "comment-btn-container";
     commentBtn.innerText = "Comment";
-    
+
     commentContainer.append(commentTextarea);
     commentBtnContainer.append(commentBtn);
     commentContainer.append(commentBtnContainer);
 
-    commentBtn.onclick = () => { createReply(post, commentTextarea.value); commentTextarea.value = ""};
+    commentBtn.onclick = () => { createReply(post, commentTextarea.value); commentTextarea.value = "" };
 
     repliesContainer.append(commentContainer);
 };
@@ -156,7 +168,7 @@ createReply = async (post, content) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({postId: post, content: content})
+        body: JSON.stringify({ postId: post, content: content })
     });
 
     if (response.status == 200) {
