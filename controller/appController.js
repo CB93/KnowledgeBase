@@ -26,6 +26,10 @@ module.exports = {
 
 	},
 
+	profile: (req,res) => {
+		return res.render('userprofile', {user: req.params.id})
+	},
+
 
 	messaging: async (req, res) => {
 		return res.render('messaging', { messagingCSS: true });
