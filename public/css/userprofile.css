@@ -1,149 +1,62 @@
-
-#left-side-div{
-  
-    width: 60%;
-    float: left;
-
+#profile-container {
+    margin: 50px 200px 0px 200px;
+    position: relative;
 }
 
-#user-image{
-    zoom: 2;
-    border-radius: 50%;
-    border: 3px solid #d9d9d9;   
-    margin: 1%;
+#user-photo {
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
 }
 
-#user-name {
-    font-size: 30px;
-    margin: 1%;
-}
-#user-about {
-    font-size: 25px;
-    margin: 1%;
+#user-card-area {
 }
 
-#user-country {
-    font-size: 20px;
-    margin: 1%;
-}
-
-
-#right-side-div{
-    float: center;
-    margin-top: 14%;
-    
-}
-
-#message-btn{
-    background-color: #25a7da;
-    color: white;
-    font-size: 20px;
-    margin-bottom: 1%;
-}
-
-#message-btn:hover{
-    border:1px solid #1a7599;
-}
-
-
-
-#number-of-likes{
-    color: #25a7da;
-    font-size: 20px;
-    float: center;
-
-}
-
-#like-option{
-    background-color: #25a7da;
-    font-size: 30px;
-    height: 50px;
-    
-    color:white;
-    width: 50px;
-    
-    border-radius: 50%;
-    padding-left: 0.7%;
-    padding-top: 0%;
-    
-    margin-left: 4%;
-    position: absolute;   
-}
-#like-option:hover{
-    border:2px solid #1a7599;
-}
-
-#number-of-posts {
-    margin-top: 1%;   
-    color: #25a7da;
-    font-size: 20px;
-    float: center;
-}
-
-#center-side-div{
-   
-    align-content: center;
-    margin-top: 4%;
-}
-#center-heading{
-    font-size: 30px;
-    font-style: bold;
-    float: center;
-    padding-left: 40%;
-}
-
-
-.user-post {
-    margin-bottom: 2%;
-}
-
-
-.user-post-image{
-   zoom:1.5;
-   border-radius: 50%;
-   border: 3px solid #d9d9d9;   
-   margin: 1%;
-   margin-top: -3%;
-   
-}
-
-.user-post-subject {
-      padding-top: 2%;
-      padding-left: 24%;
-      font-size: 20px;
-      
-      width: 80%;    
-}
-
-
-.user-post-topic{
-    
-    float: right;
-    margin-right: 10%;
-    font-size:20px;
-    border: 1px solid #25a7da;
-    color: #25a7da;
-    padding: 3px;
-    margin-left: 70%;
-    margin-top: -1.5%;
+#profile-actions-container {
     position: absolute;
+    bottom: 20%;
+    left: 100%;
 }
 
-.user-post-message{
-    padding-left: 24%;
-    font-size: 18px;
-    
-    margin-top: -6%;
-    min-height: 100px;
-    width: 80%; 
+#msg-btn {
+    border-style: solid;
+    border-radius: 5px;
+    background-color: #0074B5;
+    font-size: 25px;
+    color: white;
 }
 
-.user-post-reply{
-    float:right;
-    margin-top: -2.2%;  
-    margin-right: 5%;
+#like-btn {
+    height: 40px;
+    width: 40px;
+    border-style: solid;
+    border-radius: 100%;
+    background-color: #0074B5;
+    color: white;
 }
 
-.user-post-date{
-    padding-left: 24%;
+#likes-count {
+    float:left;
+    margin-right: 10px;
+}
+
+#about {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#user-post-container {
+    margin-top: 50px;
+}
+
+#post-header {
+    margin: 0px auto 50px auto;
+}
+
+#posts-count {
+    float: left;
+}
+
+.about-user {
+    margin-top: 30px;
 }
