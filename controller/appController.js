@@ -30,6 +30,7 @@ module.exports = {
 		db.fetchProfileDetails(req, (err,results) => {
 			if (err) throw err;
 			else {
+				console.log(results[0])
 			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true })
 			}
 		})

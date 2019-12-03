@@ -1,22 +1,22 @@
 <div id="profile-container">
     <div id="user-card-area" class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="row profile-pic">
-                <img id="user-photo" src="https://randomuser.me/api/portraits/med/men/3.jpg"/>
+                <img id="user-photo" src={{userDetails.imageurl}}>
             </div>
-            <div class="row about-user">
-                <div id="user-name">
-                    <h4>Kevin Hudson</h4>
+            <div class="about-user">
+                <div id=" row user-name">
+                    <h3>{{userDetails.firstname}}  {{userDetails.lastname}}</h3>
                 </div>
-                <div id="about">
-                    <h5>Team lead | Part time singer | Full time dad</h5>
+                <div id="row about">
+                    <h5>{{userDetails.about}}</h5>
                 </div>
-                <div id="location">
-                    <h5>Canada</h5>
+                <div id="row location">
+                    <h5>{{userDetails.country}}</h5>
                 </div>
             </div>
         </div>
-        <div class="col-sm-9 profile-actions-container">
+        <div class="col-sm-8 profile-actions-container">
             <div id="profile-actions-container">
                 <div id="message-btn-container">
                     <button id="msg-btn">Message</button>
@@ -33,7 +33,7 @@
     </div>
     <div id="user-post-container" class="row">
         <div id="post-header">
-            <h2>All posts by Kevin</h2>
+            <h2>All posts by {{userDetails.firstname}}</h2>
         </div>
         <div id="latest-post-container">
         </div>

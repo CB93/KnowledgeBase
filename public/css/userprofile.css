@@ -8,10 +8,16 @@
     width: 150px;
     height: 150px;
 }
-
-#user-card-area {
+.profile-pic {
+    justify-content: center;
+}
+.about-user h5, h3 {
+text-align: left;
 }
 
+.about-user h5 {
+    text-align: left;
+    }
 #profile-actions-container {
     position: absolute;
     bottom: 20%;
