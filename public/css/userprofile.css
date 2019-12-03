@@ -1,5 +1,5 @@
 #profile-container {
-    margin: 50px 250px 0px 250px;
+    margin: 50px 200px 0px 200px;
     position: relative;
 }
 
@@ -9,10 +9,13 @@
     height: 150px;
 }
 
+#user-card-area {
+}
+
 #profile-actions-container {
     position: absolute;
-    bottom: 30%;
-    left: 80%;
+    bottom: 20%;
+    left: 100%;
 }
 
 #msg-btn {
@@ -37,11 +40,21 @@
     margin-right: 10px;
 }
 
-#likes-btn-container {
+#about {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #user-post-container {
     margin-top: 50px;
+}
+
+#post-header {
+    margin: 0px auto 50px auto;
+}
+
+#posts-count {
+    float: left;
 }
 
 .about-user {
