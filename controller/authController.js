@@ -7,14 +7,14 @@ module.exports = {
         req.session.email = null;
         req.session.user = null;
         req.session.token = null;
-		return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: req.query.error, login: true });
+		return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: req.query.error, login: true, auth:true });
 	},
 
 	login: (req, res) => {
 		db.getUser(req, (err,user) => {
 			if (err) {
 				
-				return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true });
+				return res.render('register', { pageTitle: 'People App', heading: 'Welcome to KnowledgeBase', registerCSS: true, validation: err.message, login: true, auth:true });
 		}
 
             const token = jwt.sign({user: user[0].iduser, name: user[0].name}, process.env.JWT_SECRET);
@@ -76,4 +76,34 @@ module.exports = {
 	about: (req, res) => {
 		return res.render('about', { pageTitle: 'People App', heading: 'Tell us a bit more about yourself', aboutCSS: true, login: true })
 	},
+
+
+	search: (req, res) => {
+		db.search(req, (err,results) => {
+			let month = {
+				Jan: '01', Feb:'02', Mar : '03', Apr : '04', May: '05',
+				 Jun: '06', Jul: '07', Aug : '08',  Sep : '09', Oct: '10',
+				 Nov: '11', Dec : '12'
+			}
+			let data = results
+			console.log(results)
+			for(let i = 0; i < data.length; i++) {
+				let date = ''+data[i].date
+				
+				 let temporaryDate = date.split(" ")
+				 let tempMonth = '' +temporaryDate[1]
+				 
+				 let newdate  = '' + temporaryDate[2] + '-'  + month[tempMonth] + '-' + temporaryDate[3];
+				 data[i].date = newdate
+				 console.log(date.split(" "))
+			}
+			
+			return res.render('searchResultCard',{searchResultCardCSS:true, results: data})
+
+		})		
+
+		
+	},
+
+
 }
