@@ -1,10 +1,10 @@
 const latestPostContainer = document.getElementById("latest-post-container");
 
-renderPosts = async (pagination) => {
+renderPosts = async (url) => {
     while (latestPostContainer.firstChild)
         latestPostContainer.removeChild(latestPostContainer.firstChild);
 
-    const response = await fetch(`http://localhost:3000/post/${pagination}`, {
+    const response = await fetch(url, {
         method: "GET",
         mode: "cors",
         credentials: "same-origin",
@@ -83,12 +83,12 @@ renderPosts = async (pagination) => {
     });
 };
 
-renderNextPage = async (pagination) => {
-    renderPosts(1);
+renderNextPage = async () => {
+    renderPosts(`http://localhost:3000/post/1`);
 };
 
 renderPreviousPage = async (pagination) => {
-    renderPosts(-1);
+    renderPosts(`http://localhost:3000/post/-1`);
 };
 
 renderReplies = async (post) => {
@@ -176,4 +176,11 @@ createReply = async (post, content) => {
     }
 };
 
-renderPosts(0);
+const page = window.location.href;
+
+if (page.split("/")[page.split("/").length - 1] == "landing") {
+    renderPosts("http://localhost:3000/post/0");
+} else {
+    const user = page.split("/")[page.split("/").length - 1];
+    renderPosts(`http://localhost:3000/post/user/${user}`);
+}

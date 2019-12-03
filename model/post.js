@@ -15,8 +15,22 @@ module.exports = {
     },
 
     getPosts: (req, callback) => {
+        if (req.params.userId) {
+            req.con.query(`select id, subject, content, topic,iduser, firstname, lastname, imageurl, posts.date, posts.replies from posts join user on posts.creator = user.iduser where user.iduser = ${req.params.userId} order by posts.date`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to fetch discussion/posts.");
+            }
+            callback(null, results);
+            });
+            return;
+        }
+
         req.session.pagination = parseInt(req.session.pagination, 10) < 0 ? 
-                                 0 : parseInt(req.session.pagination, 10) + parseInt(req.params.pagination, 10);
+            0 : parseInt(req.session.pagination, 10) + parseInt(req.params.pagination, 10);
+
+        if (parseInt(req.session.pagination, 10) < 0)
+            req.session.pagination = 0;
 
         req.con.query(`select id, subject, content, topic,iduser, firstname, lastname, imageurl, posts.date, posts.replies from posts join user on posts.creator = user.iduser order by posts.date desc limit ${5 * req.session.pagination}, 5`, (err, results) => {
             if (err) {
