@@ -1,5 +1,4 @@
 const db = require("../model/app");
-const dbMessage = require("../model/message");
 
 module.exports = {
 
@@ -9,7 +8,7 @@ module.exports = {
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
 			else {
-				
+
 				req.session.userDetails = userDetails[0]
 				const userDetail = userDetails[0]
 
@@ -25,13 +24,16 @@ module.exports = {
 				return res.redirect('/landing')
 			}
 		})
-
 	},
 
-	profile: (req,res) => {
-		return res.render('userprofile', {user: req.params.id})
+	profile: (req, res) => {
+		db.fetchProfileDetails(req, (err,results) => {
+			if (err) throw err;
+			else {
+			return res.render('userprofile', { user: results[0], userprofileCSS: true })
+			}
+		})
 	},
-
 
 	messaging: async (req, res) => {
 		return res.render('messaging', { messagingCSS: true });

@@ -5,7 +5,7 @@ module.exports = {
 	getUser: (req, callback) => {
 
 		const email = req.body.email
-        const password = sha1(req.body.password);
+		const password = sha1(req.body.password);
 
 		req.con.query(`SELECT * FROM user WHERE name=?`, [email], (err, results) => {
 			if (err) {

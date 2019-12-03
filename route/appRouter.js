@@ -9,5 +9,6 @@ router.post("/edit", authorize, appController.editProfile)
 router.get("/messaging", authorize, appController.messaging);
 
 // Profile
-router.get("/profile/:id", authorize, appController.profile)
+router.get("/profile/:id", authorize, appController.profile);
+
 module.exports = router;

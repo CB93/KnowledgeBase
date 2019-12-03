@@ -4,7 +4,7 @@ module.exports = {
         const message = req.body.message;
         const conversation = req.body.conversation;
 
-		req.con.query(`INSERT INTO messages (text, sender, conversation) VALUES ("${req.body.message}", "${req.session.userId}", "${conversation}")`, (err) => {
+        req.con.query(`INSERT INTO messages (text, sender, conversation) VALUES ("${req.body.message}", "${req.session.userId}", "${conversation}")`, (err) => {
             if (err) {
                 console.log(err);
             }
@@ -43,7 +43,7 @@ module.exports = {
                 console.log(err);
                 callback("Unable to fetch conversations.");
             }
-            const data  = {convo: results, user: req.session.userId};
+            const data = { convo: results, user: req.session.userId };
             callback(null, data);
         });
     }
