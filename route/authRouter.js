@@ -29,4 +29,9 @@ module.exports = router;
 // Profile
 
 
+//Search 
+router.post("/search", authorize, authController.search)
+
+
+
 
