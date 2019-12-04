@@ -11,8 +11,8 @@ module.exports = {
 
 				req.session.userDetails = userDetails[0]
 				const userDetail = userDetails[0]
-
-				return res.render('landing', { user: userDetail, landingCSS: true , landing: true})
+				
+				return res.render('landing', { user: userDetail, landingCSS: true , landing: true, searchByTopicCSS:true})
 			}
 		})
 	},

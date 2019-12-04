@@ -61,17 +61,7 @@ module.exports = {
 	search: (req, callback) => {
 		console.log('DB request', req.body.searchValue)
 		const value = req.body.searchValue;
-		// userId is auto incremented in DB
-		// const newUser = {
-		// 	name: req.session.email,
-		// 	password: sha1(req.session.password),
-		// 	firstname: req.session.firstName,
-		// 	lastname: req.session.lastName,
-		// 	country: req.body.country,
-		// 	about: req.body.about,
-		// 	imageurl: req.body.url,
-		// 	birthday: req.body.birthday
-		// }
+		
 
 		req.con.query(`Select * from posts JOIN user  on posts.creator = user.iduser where subject like '%${value}%'`, (err, results) => {
 
@@ -88,5 +78,24 @@ module.exports = {
 		})
 	},
 
+	searchByTopic: (req, callback) => {
+		
+		const value = req.body.searchByTopic;
+		console.log('searchByTopic ', value)
+
+		req.con.query(`Select * from posts JOIN user  on posts.creator = user.iduser where topic like '%${value}%'`, (err, results) => {
+
+			if (err) {
+				console.log("ERROR")
+				callback(Error('Error from Database'))
+			} else {
+
+				console.log("results")
+				
+				callback(null,results)
+
+			}
+		})
+	},
 
 }
