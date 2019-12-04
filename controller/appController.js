@@ -11,10 +11,11 @@ module.exports = {
 			else {
 	        	db.countUserPosts(req, (err, results) => {
 	        		if (err) throw err;
-	        		else {
+                    else {
                         userDetails[0]["postCount"] = results[0].n
         				req.session.userDetails = userDetails[0]
-        				userDetail = userDetails[0]
+                        userDetail = userDetails[0]
+                        console.log(userDetail);
 	        		}
 	        	});
 
