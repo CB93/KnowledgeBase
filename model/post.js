@@ -11,7 +11,12 @@ module.exports = {
                 console.log(err);
 				callback("Unable to post.");
             }
-		});
+            else {
+
+            }
+        });
+
+
     },
 
     getPosts: (req, callback) => {
