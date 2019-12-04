@@ -12,7 +12,7 @@ module.exports = {
 				req.session.userDetails = userDetails[0]
 				const userDetail = userDetails[0]
 
-				return res.render('landing', { user: userDetail, landingCSS: true })
+				return res.render('landing', { user: userDetail, landingCSS: true , landing: true})
 			}
 		})
 	},
@@ -30,7 +30,7 @@ module.exports = {
 		db.fetchProfileDetails(req, (err,results) => {
 			if (err) throw err;
 			else {
-			return res.render('userprofile', { user: results[0], userprofileCSS: true })
+			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true })
 			}
 		})
 	},
