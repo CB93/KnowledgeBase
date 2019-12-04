@@ -2,6 +2,10 @@ const latestPostContainer = document.getElementById("latest-post-container");
 const page = window.location.href;
 const user = page.split("/")[page.split("/").length - 1];
 
+window.onload = () => {
+    location.reload();
+}
+
 renderPosts = async (url) => {
     while (latestPostContainer.firstChild)
         latestPostContainer.removeChild(latestPostContainer.firstChild);
@@ -203,5 +207,3 @@ if (page.split("/")[page.split("/").length - 1] == "landing") {
 } else {
     renderPosts(`http://52.89.134.12:3000/post/user/${user}`);
 }
-
-location.reload();
