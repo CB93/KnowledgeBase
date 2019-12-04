@@ -1,29 +1,41 @@
-<div id = 'left-side-div'>
-   <img id = 'user-image' src = "https://randomuser.me/api/portraits/med/men/3.jpg">
-   <div id ='user-name'>Kevin Hudson</div>
-   <div id = 'user-about'>About</div>
-   <div id = 'user-country'>Canada</div>
-</div>
-
-<div id = 'right-side-div'>
-    <button id = 'message-btn'>Message</button>
-    <div id = 'number-of-likes'>5 Likes
-        <button id = 'like-option'>+</button>
+<div id="profile-container">
+    <div id="user-card-area" class="row">
+        <div class="col-sm-3">
+            <div class="row profile-pic">
+                <img id="user-photo" src="https://randomuser.me/api/portraits/med/men/3.jpg"/>
+            </div>
+            <div class="row about-user">
+                <div id="user-name">
+                    <h4>Kevin Hudson</h4>
+                </div>
+                <div id="about">
+                    <h5>Team lead | Part time singer | Full time dad</h5>
+                </div>
+                <div id="location">
+                    <h5>Canada</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 profile-actions-container">
+            <div id="profile-actions-container">
+                <div id="message-btn-container">
+                    <button id="msg-btn">Message</button>
+                </div><br/>
+                <div id="like-btn-container">
+                    <h5 id="likes-count">5 Likes</h5>
+                    <button id="like-btn"><i class='fas fa-plus'></i></button>
+                </div><br/>
+                <div id="post-counter">
+                    <h5 id="posts-count">2 Posts</h5>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id = 'number-of-posts'>2 Posts</div>
-</div>
-
-<div id ='center-side-div'>
-    <div id = 'center-heading'><b>All posts by Kevin</b></div>
-    <div class = 'user-post'>
-        <div class = 'user-post-subject'>Subject Subject Subject </div>
-        <div class = 'user-post-topic'>Java</div>
-        <img class= 'user-post-image' src = 'https://randomuser.me/api/portraits/med/men/3.jpg'>
-        <div class = 'user-post-message'>asdasfasfsadasd</div>
-        <div class = 'user-post-date'>11 Sep 2019</div>
-        <div class = 'user-post-reply'>7 replies</div>
+    <div id="user-post-container" class="row">
+        <div id="post-header">
+            <h2>All posts by Kevin</h2>
+        </div>
+        <div id="latest-post-container">
+        </div>
     </div>
-  
 </div>
-
-
