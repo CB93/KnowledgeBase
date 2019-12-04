@@ -102,6 +102,34 @@ module.exports = {
 
 		
 	},
+	
+	searchByTopic: (req, res) => {
 
+		
+		db.searchByTopic(req, (err,results) => {
+			let month = {
+				Jan: '01', Feb:'02', Mar : '03', Apr : '04', May: '05',
+				 Jun: '06', Jul: '07', Aug : '08',  Sep : '09', Oct: '10',
+				 Nov: '11', Dec : '12'
+			}
+			let data = results
+			console.log(results)
+			for(let i = 0; i < data.length; i++) {
+				let date = ''+data[i].date
+				
+				 let temporaryDate = date.split(" ")
+				 let tempMonth = '' +temporaryDate[1]
+				 
+				 let newdate  = '' + temporaryDate[2] + '-'  + month[tempMonth] + '-' + temporaryDate[3];
+				 data[i].date = newdate
+				 console.log(date.split(" "))
+			}
+			
+			return res.render('searchResultCard',{searchResultCardCSS:true, results: data, searchByTopic:true})
+
+		})		
+
+		
+	},
 
 }

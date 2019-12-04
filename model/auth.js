@@ -76,5 +76,24 @@ module.exports = {
 		})
 	},
 
+	searchByTopic: (req, callback) => {
+		
+		const value = req.body.searchByTopic;
+		console.log('searchByTopic ', value)
+
+		req.con.query(`Select * from posts JOIN user  on posts.creator = user.iduser where topic like '%${value}%'`, (err, results) => {
+
+			if (err) {
+				console.log("ERROR")
+				callback(Error('Error from Database'))
+			} else {
+
+				console.log("results")
+				
+				callback(null,results)
+
+			}
+		})
+	},
 
 }

@@ -34,6 +34,7 @@ module.exports = router;
 
 //Search 
 router.post("/search", authorize, authController.search)
+router.post("/searchbytopic", authorize, authController.searchByTopic)
 
 
 
