@@ -86,11 +86,11 @@ renderPosts = async (url) => {
 };
 
 renderNextPage = async () => {
-    renderPosts(`http://localhost:3000/post/1`);
+    renderPosts(`http://52.89.134.12:3000/post/1`);
 };
 
 renderPreviousPage = async (pagination) => {
-    renderPosts(`http://localhost:3000/post/-1`);
+    renderPosts(`http://52.89.134.12:3000/post/-1`);
 };
 
 renderReplies = async (post) => {
@@ -99,7 +99,7 @@ renderReplies = async (post) => {
     while (repliesContainer.firstChild)
         repliesContainer.removeChild(repliesContainer.firstChild);
 
-    const response = await fetch(`http://localhost:3000/post/${post}/replies`, {
+    const response = await fetch(`http://52.89.134.12:3000/post/${post}/replies`, {
         method: "GET",
         mode: "cors",
         credentials: "same-origin",
@@ -163,7 +163,7 @@ renderReplies = async (post) => {
 };
 
 createReply = async (post, content) => {
-    const response = await fetch("http://localhost:3000/post/reply", {
+    const response = await fetch("http://52.89.134.12:3000/post/reply", {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",
@@ -179,11 +179,11 @@ createReply = async (post, content) => {
 };
 
 messageUser = async () => {
-    window.location.href = `http://localhost:3000/conversation/user/${user}`;
+    window.location.href = `http://52.89.134.12:3000/conversation/user/${user}`;
 }
 
 createConversation = async () => {
-    const response = await fetch("http://localhost:3000/conversations", {
+    const response = await fetch("http://52.89.134.12:3000/conversations", {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",
@@ -199,7 +199,7 @@ createConversation = async () => {
 
 
 if (page.split("/")[page.split("/").length - 1] == "landing") {
-    renderPosts("http://localhost:3000/post/0");
+    renderPosts("http://52.89.134.12:3000/post/0");
 } else {
-    renderPosts(`http://localhost:3000/post/user/${user}`);
+    renderPosts(`http://52.89.134.12:3000/post/user/${user}`);
 }

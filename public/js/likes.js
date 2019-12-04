@@ -1,5 +1,5 @@
 const like = async () => {
-    const response = await fetch("http://localhost:3000/like", {
+    const response = await fetch("http://52.89.134.12:3000/like", {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",

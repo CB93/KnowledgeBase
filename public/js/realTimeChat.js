@@ -1,4 +1,4 @@
-const socket = io("http://localhost:5000");
+const socket = io("http://52.89.134.12:5000");
 const conversations = document.getElementById("current-conversations");
 const message = document.getElementById("message-input");
 const sendBtn = document.getElementById("send-button");
@@ -51,7 +51,7 @@ renderMessage = (message) => {
 };
 
 renderMessages = async (convo) => {
-    const response = await fetch(`http://localhost:3000/message/${convo}`, {
+    const response = await fetch(`http://52.89.134.12:3000/message/${convo}`, {
         method: "GET",
         mode: "cors",
         credentials: "same-origin",
@@ -73,7 +73,7 @@ renderMessages = async (convo) => {
 };
 
 renderConversations = async () => {
-    const response = await fetch("http://localhost:3000/conversations", {
+    const response = await fetch("http://52.89.134.12:3000/conversations", {
         method: "GET",
         mode: "cors",
         credentials: "same-origin",
@@ -126,7 +126,7 @@ sendBtn.onclick = async (event) => {
     event.preventDefault();
     let messageValue = message.value;
 
-    const response = fetch("http://localhost:3000/message", {
+    const response = fetch("http://52.89.134.12:3000/message", {
         method: "POST",
         mode: "cors",
         credentials: "same-origin",
@@ -147,7 +147,7 @@ sendBtn.onclick = async (event) => {
                 conversationBox.scrollTop = conversationBox.scrollHeight - conversationBox.clientHeight;
             }, 100);
 
-            fetch("http://localhost:3000/sendEmail", {
+            fetch("http://52.89.134.12:3000/sendEmail", {
                 method: "POST",
                 mode: "cors",
                 credentials: "same-origin",
