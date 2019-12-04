@@ -43,7 +43,7 @@
 		<nav class="navbar navbar-expand-sm bg-primary justify-content-end">
 			<a id="navbar-main" class="navbar-brand">KnowledgeBase</a>
 		{{#unless auth}}
-		<form id = 'search-form' action = 'http://localhost:3000/search' method="POST">
+		<form id = 'search-form' action = 'http://52.89.134.12:3000/search' method="POST">
   			<input id = 'search-bar' type="search" placeholder="Search..." name = 'searchValue'>
 		</form>
 		{{/unless}}
@@ -67,7 +67,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script defer src="http://localhost:5000/socket.io/socket.io.js"></script>
+<script defer src="http://52.89.134.12:5000/socket.io/socket.io.js"></script>
 {{#if messagingCSS}}
 <script defer type="text/javascript" src="/js/realTimeChat.js"></script>
 {{/if}}
