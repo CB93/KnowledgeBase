@@ -9,9 +9,13 @@ module.exports = {
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
 			else {
-
-				req.session.userDetails = userDetails[0]
-				userDetail = userDetails[0]
+	        	db.countUserPosts(req, (err, results) => {
+	        		if (err) throw err;
+	        		else {
+        				req.session.userDetails = userDetails[0]["postCount"] = results[0].n
+        				userDetail = userDetails[0]
+	        		}
+	        	});
 
 				// return res.render('landing', { user: userDetail, landingCSS: true , landing: true, searchByTopicCSS:true})
 			}
@@ -19,12 +23,6 @@ module.exports = {
 
 
 
-		db.countUserPosts(req, (err, results) => {
-			if (err) throw err;
-			else {
-				req.session.postCount = results[0].n
-			}
-		})
 		db.countUserMessages(req, (err, results) => {
 			if (err) throw err;
 			else {
