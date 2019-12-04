@@ -12,7 +12,7 @@ module.exports = {
 	        	db.countUserPosts(req, (err, results) => {
 	        		if (err) throw err;
                     else {
-                        userDetails[0]["postCount"] = results[0].n
+                        req.session.postCount = results[0].n
         				req.session.userDetails = userDetails[0]
                         userDetail = userDetails[0]
                         console.log(userDetail);
@@ -33,7 +33,7 @@ module.exports = {
 				const postCount = req.session.postCount
 				const messageCount = results[0].numberofmessages;
 
-				return res.render('landing', { messageCount: messageCount, user: userDetail, numberOfPosts: postCount, landingCSS: true, landing: true, searchByTopicCSS: true })
+				return res.render('landing', { messageCount: messageCount, user: userDetail, numberOfPosts: postCount, landingCSS: true, landing: true, searchByTopicCSS: true , likesCount: req.session.likes})
 			}
 		})
 

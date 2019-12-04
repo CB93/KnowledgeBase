@@ -10,6 +10,7 @@ module.exports = {
             } else {
                 req.con.query(`select * from likes where likee = ${req.session.userId}`, (err, likes) => {
                     if (err) callback("Likes fetch error.");
+                    req.session.likes = likes.length ? likes.length : 0;
                     results[0]["likes"] = likes.length ? likes.length : 0;
 				    callback(null, results)
                 });
@@ -29,7 +30,6 @@ module.exports = {
                     req.con.query(`select * from posts where creator = ${results[0].iduser}`, (err, posts) => {
                         results[0]["postCount"] = posts.length;
                     });
-
                     results[0]["likes"] = likes.length ? likes.length : 0;
 				    callback(null, results)
                 });
