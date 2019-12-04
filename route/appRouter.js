@@ -7,6 +7,7 @@ const appController = require("../controller/appController")
 router.get("/landing", authorize, appController.landing)
 router.post("/edit", authorize, appController.editProfile)
 router.get("/messaging", authorize, appController.messaging);
+router.get("/conversation/user/:recipientId", authorize, appController.conversation);
 
 // Profile
 router.get("/profile/:id", authorize, appController.profile);
