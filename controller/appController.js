@@ -57,7 +57,8 @@ module.exports = {
                     return res.redirect("/landing");
                 }		
 		    		req.session.userDetails = results[0]
-				const postCount = req.session.postCount;
+				
+		    		
 //				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
             }
 			db.countUserPosts(req, (err, results) => {
