@@ -20,5 +20,12 @@ module.exports = {
             if (err) return res.sendStatus(500);
             return res.json(results);
         });
+    },
+
+    createConversation: (req, res) => {
+        db.createConversation(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+        });
+        return res.status(200).redirect("/messaging");
     }
 }
