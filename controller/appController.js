@@ -64,8 +64,11 @@ module.exports = {
 	profilePosts: (req, res) => {
 		db.fetchProfileDetails(req, (err, results) => {
 			if (err) throw err;
-			else {
-				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, })
+            else {
+                if (results[0].iduser == req.session.userId) {
+                    return res.redirect("/landing");
+                }
+			    return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true })
 			}
 		})
 	},
