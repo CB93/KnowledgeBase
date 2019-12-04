@@ -37,5 +37,39 @@ module.exports = {
 			}
 		})
 
+	},
+
+	countUserPosts: (req, callback) => {
+
+		const userid = req.session.userDetails.iduser;
+		req.con.query(`Select COUNT(*) as n from posts JOIN user  on posts.creator = user.iduser where iduser = ${userid};`, (err, results) => {
+            if (err) {
+                console.log(err);
+				callback("Unable to post.");
+            }
+            else {
+                callback(null, results)
+            }
+        });
+
+	},
+
+	countUserMessages: (req, callback) => {
+	
+		const userid = req.session.userDetails.iduser;
+		req.con.query(`SELECT COUNT(*) as numberofmessages FROM conversations WHERE conversations.sender = ${userid} OR conversations.recipient = ${userid};`, (err, results) => {
+            if (err) {
+                console.log(err);
+				callback("Unable to post.");
+            }
+            else {
+				console.log('mess ', results)
+                callback(null, results)
+            }
+        });
+
 	}
+
+
+
 }
