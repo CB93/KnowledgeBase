@@ -203,3 +203,5 @@ if (page.split("/")[page.split("/").length - 1] == "landing") {
 } else {
     renderPosts(`http://52.89.134.12:3000/post/user/${user}`);
 }
+
+location.reload();
