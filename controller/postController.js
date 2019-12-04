@@ -33,7 +33,7 @@ module.exports = {
     postReply: (req, res) => {
         db.postReply(req, (err) => {
             if (err) return res.sendStatus(500);
+            return res.sendStatus(200);
         });
-        return res.sendStatus(200);
     }
 };
