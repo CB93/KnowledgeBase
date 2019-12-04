@@ -1,4 +1,5 @@
 <div id="profile-container">
+    {{#if isPost}}
     <div id="user-card-area" class="row">
         <div class="col-sm-4">
             <div class="row profile-pic">
@@ -6,7 +7,7 @@
             </div>
             <div class="about-user">
                 <div id=" row user-name">
-                    <h3>{{userDetails.firstname}}  {{userDetails.lastname}}</h3>
+                    <h3>{{userDetails.firstname}} {{userDetails.lastname}}</h3>
                 </div>
                 <div id="row about">
                     <h5>{{userDetails.about}}</h5>
@@ -20,17 +21,21 @@
             <div id="profile-actions-container">
                 <div id="message-btn-container">
                     <button id="msg-btn" onclick="messageUser()">Message</button>
-                </div><br/>
+                </div><br />
                 <div id="like-btn-container">
                     <h5 id="likes-count">5 Likes</h5>
                     <button id="like-btn"><i class='fas fa-plus'></i></button>
-                </div><br/>
+                </div><br />
                 <div id="post-counter">
-                    <h5 id="posts-count">2 Posts</h5>
+
+                    <h5 id="posts-count" href="/profilePosts/{{{userDetails.iduser}}}"> </a>
+                        Posts <span class="badge badge-primary badge-pill">14</span>
+                    </h5>
                 </div>
             </div>
         </div>
     </div>
+    {{/if}}
     <div id="user-post-container" class="row">
         <div id="post-header">
             <h2>All posts by {{userDetails.firstname}}</h2>
