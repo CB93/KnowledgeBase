@@ -10,10 +10,9 @@ socket.on("private-message-retrieval", (message) => {
 });
 
 startConversation = (convo) => {
-
     const newConversation = convo;
 
-    while(conversationBox.firstChild)
+    while (conversationBox.firstChild)
         conversationBox.removeChild(conversationBox.firstChild);
 
     renderMessages(convo);
@@ -29,7 +28,7 @@ renderMessage = (message) => {
     const content = document.createElement("div");
     const name = document.createElement("h6");
     const msg = document.createElement("h6");
-    
+
     messageRow.className = "row message-row";
     messageContainer.id = "messageContainer";
     profilePic.id = "profile-pic-message";
@@ -37,34 +36,36 @@ renderMessage = (message) => {
     content.className = "row";
     name.id = "name-message";
     msg.id = "message";
-    
+
     messageRow.append(messageContainer);
     messageContainer.append(profilePic);
     messageContainer.append(content);
     content.append(name);
     content.append(msg);
-    
+
     profilePic.src = message.imageurl;
     name.innerText = `${message.firstname} ${message.lastname}`;
     msg.innerText = `${message.text}`;
-    
+
     conversationBox.append(messageRow);
 };
 
 renderMessages = async (convo) => {
     const response = await fetch(`http://localhost:3000/message/${convo}`, {
-       method: "GET",
-       mode: "cors",
-       credentials: "same-origin",
-       headers: {
-           "Content-Type": "application/json"
-       },
+        method: "GET",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
     });
 
     const messages = await response.json();
     messages.forEach((message) => {
         renderMessage(message);
     });
+
+
 
     setTimeout(() => {
         conversationBox.scrollTop = conversationBox.scrollHeight - conversationBox.clientHeight;
@@ -107,12 +108,16 @@ renderConversations = async () => {
             name.innerText = `${conversation.sender_fn} ${conversation.sender_ln}`;
         }
 
-        convoCard.onclick = () => {startConversation(conversation.id)}
+        convoCard.onclick = () => { startConversation(conversation.id) }
         conversations.append(convoCard);
     });
 }
 
 sendBtn.onclick = async (event) => {
+
+
+
+
     if (currentConversation == null) {
         alert("Select or start a conversation before messaging.");
         return;
@@ -128,16 +133,29 @@ sendBtn.onclick = async (event) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({message: messageValue, conversation: currentConversation})
+        body: JSON.stringify({ message: messageValue, conversation: currentConversation })
     }).then(async (response) => {
+
+
+
         if (response.status == 200) {
             const user = await response.json();
-            socket.emit("private-message", {room: `${currentConversation}`, message: messageValue, user: user});
-            renderMessage({text: messageValue, firstname: user[0].firstname, lastname: user[0].lastname, imageurl: user[0].imageurl});
+            socket.emit("private-message", { room: `${currentConversation}`, message: messageValue, user: user });
+            renderMessage({ text: messageValue, firstname: user[0].firstname, lastname: user[0].lastname, imageurl: user[0].imageurl });
 
             setTimeout(() => {
                 conversationBox.scrollTop = conversationBox.scrollHeight - conversationBox.clientHeight;
             }, 100);
+
+            fetch("http://localhost:3000/sendEmail", {
+                method: "POST",
+                mode: "cors",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: messageValue, conversation: currentConversation })
+            })
 
             messageValue = null;
         }

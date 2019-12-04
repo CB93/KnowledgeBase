@@ -55,7 +55,6 @@ module.exports = {
 		db.fetchProfileDetails(req, (err,results) => {
 			if (err) throw err;
 			else {
-				console.log(results[0])
 			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true })
 			}
 		})
@@ -63,5 +62,9 @@ module.exports = {
 
 	messaging: async (req, res) => {
 		return res.render('messaging', { messagingCSS: true });
-	}
+    },
+
+    conversation: (req, res) => {
+        return res.render('conversation', { conversationCSS: true });
+    }
 }

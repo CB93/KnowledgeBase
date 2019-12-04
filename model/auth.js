@@ -59,9 +59,7 @@ module.exports = {
 	},
 
 	search: (req, callback) => {
-		console.log('DB request', req.body.searchValue)
 		const value = req.body.searchValue;
-		
 
 		req.con.query(`Select * from posts JOIN user  on posts.creator = user.iduser where subject like '%${value}%'`, (err, results) => {
 

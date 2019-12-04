@@ -100,6 +100,11 @@ h4{
     height: 100px;
 }
 
+.poster-profile-pic:hover {
+    opacity: 0.3;
+    cursor: pointer;
+}
+
 .discussion-topic {
     margin-top: 25px;
     float: right;

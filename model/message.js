@@ -46,5 +46,48 @@ module.exports = {
             const data = { convo: results, user: req.session.userId };
             callback(null, data);
         });
+    },
+
+    createConversation: (req, callback) => {
+        const userId = req.session.userId;
+        const recipient = req.body.recipient;
+        const message = req.body.message;
+
+        req.con.query(`select * from conversations where 
+        (conversations.sender = ${userId} and conversations.recipient = ${recipient}) 
+        or (conversations.sender = ${recipient} and conversations.recipient = ${userId})`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to create conversation.");
+            }
+
+            if (results.length == 0) {
+                req.con.query(`insert into conversations (sender, recipient) values("${userId}", "${recipient}")`, (err) => {
+                    if (err) {
+                        console.log(err);
+                        callback("Unable to create conversation");
+                    }
+                    req.con.query(`select id from conversations order by id desc limit 1`, (err, convo) => {
+                         req.con.query(`INSERT INTO messages (text, sender, conversation) VALUES ("${message}", "${userId}", "${convo[0].id}")`)
+                    });
+                });
+            }
+        });
+    },
+  
+    getEmailInformation: (req, callback) => {
+
+        const conversationId = req.body.conversation
+        req.con.query(`Select a.firstname AS senderFirst, a.lastname AS senderLast , b.firstname AS RecieverFirst, b.lastname AS RecieverLast, b.name AS SenderEmail, a.name AS RecieverEmail from conversations 
+        join user a on conversations.sender = a.iduser 
+        join user b on conversations.recipient = b.iduser
+        where conversations.id = ${conversationId};`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to fetch conversation data");
+            }
+            const data = { message: req.body.message, emailInfo: results }
+            callback(null, data)
+        })
     }
 };
