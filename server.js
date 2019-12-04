@@ -8,7 +8,6 @@ const con = require("./util/database.js")
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const io = require("socket.io")(5000);
-const port = process.env.SERVER_PORT|| 3000;
 
 io.on("connection", (socket) => {
     socket.on("leave", (conversation) => {
@@ -59,4 +58,4 @@ app.use(loginRouter);
 app.use(appRouter)
 app.use(express.static(__dirname + '/public'));
 
-app.listen(port, () => console.log('Server ready'))
+app.listen(process.env.PORT || 3000, () => console.log('Server ready'))
