@@ -55,7 +55,16 @@ module.exports = {
 		db.fetchProfileDetails(req, (err,results) => {
 			if (err) throw err;
 			else {
-			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true })
+			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true, isPost:true  })
+			}
+		})
+	},
+
+	profilePosts:(req, res) => {
+		db.fetchProfileDetails(req, (err,results) => {
+			if (err) throw err;
+			else {
+			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true, })
 			}
 		})
 	},
