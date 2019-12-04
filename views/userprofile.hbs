@@ -23,9 +23,9 @@
                     <button id="msg-btn" onclick="messageUser()">Message</button>
                 </div><br />
                 <div id="like-btn-container">
-                    <h5 id="likes-count">5 Likes</h5>
-                    <button id="like-btn"><i class='fas fa-plus'></i></button>
-                </div><br />
+                    <h5 id="likes-count">{{userDetails.likes}} Likes</h5>
+                    <button onclick="like()" id="like-btn"><i class='fas fa-plus'></i></button>
+                </div><br/>
                 <div id="post-counter">
                     <h5 id="posts-count"> <a href="/profilePosts/{{{userDetails.iduser}}}"> Posts</a> </a></h5>
                     <span class="badge badge-primary badge-pill">{{postCount}}</span>

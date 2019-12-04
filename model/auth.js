@@ -74,7 +74,7 @@ module.exports = {
 
 			}
 		})
-	},
+    },
 
 	searchByTopic: (req, callback) => {
 		
@@ -94,6 +94,30 @@ module.exports = {
 
 			}
 		})
-	},
+    },
 
+    like: (req, callback) => {
+        const liker = req.session.userId;
+        const likee = req.body.likee;
+        req.con.query(`select * from likes where liker = ${liker} and likee = ${likee}`, (err, likes) => {
+            if (err) console.log(err);
+            if (!likes.length) {
+                req.con.query(`insert into likes (liker, likee) values("${liker}", "${likee}")`, (err, results) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    callback(null);
+                });
+            }
+        });
+    },
+
+    getLikes: (req, callback) => {
+        req.con.query(`select * from likes where likee = ${req.params.user}`, (err, results) => {
+            if (err) {
+                console.log("Like insert failed.");
+            }
+            callback(null, results);
+        });
+    }
 }

@@ -7,8 +7,12 @@ module.exports = {
 		req.con.query(`SELECT * FROM user WHERE name=?`, [email], (err, results) => {
 			if (err) {
 				callback(Error('Error from Database'))
-			} else {
-				callback(null, results)
+            } else {
+                req.con.query(`select * from likes where likee = ${req.session.userId}`, (err, likes) => {
+                    if (err) callback("Likes fetch error.");
+                    results[0]["likes"] = likes.length ? likes.length : 0;
+				    callback(null, results)
+                });
 			}
 		})
 	},
@@ -18,8 +22,12 @@ module.exports = {
 		req.con.query(`SELECT * FROM user WHERE iduser=?`, [userId], (err, results) => {
 			if (err) {
 				callback(Error('Error from Database'))
-			} else {
-				callback(null, results)
+            } else {
+                req.con.query(`select * from likes where likee = ${userId}`, (err, likes) => {
+                    if (err) callback("Likes fetch error.");
+                    results[0]["likes"] = likes.length ? likes.length : 0;
+				    callback(null, results)
+                });
 			}
 		})
 	},
@@ -68,7 +76,4 @@ module.exports = {
         });
 
 	}
-
-
-
 }

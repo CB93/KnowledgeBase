@@ -30,7 +30,8 @@ router.post("/sendEmail", authorize, messageController.sendEmail)
 module.exports = router;
 
 // Profile
-
+router.post("/like", authorize, authController.like);
+router.get("/like", authorize, authController.getLikes);
 
 //Search 
 router.post("/search", authorize, authController.search)
