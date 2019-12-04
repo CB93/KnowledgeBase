@@ -1,7 +1,7 @@
 const db = require("../model/app");
 
 module.exports = {
-	
+
 	landing: (req, res) => {
 		let userDetail = '';
 
@@ -9,15 +9,15 @@ module.exports = {
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
 			else {
-				
+
 				req.session.userDetails = userDetails[0]
 				userDetail = userDetails[0]
-				
+
 				// return res.render('landing', { user: userDetail, landingCSS: true , landing: true, searchByTopicCSS:true})
 			}
 		})
 
-		
+
 
 		db.countUserPosts(req, (err, results) => {
 			if (err) throw err;
@@ -28,14 +28,14 @@ module.exports = {
 		db.countUserMessages(req, (err, results) => {
 			if (err) throw err;
 			else {
-				console.log('results' , results[0]);
+				console.log('results', results[0]);
 				const userDetail = req.session.userDetails
 				const postCount = req.session.postCount
 				const messageCount = results[0].numberofmessages;
-				
-				 return res.render('landing', { messageCount:messageCount, user: userDetail, numberOfPosts: postCount, landingCSS: true , landing: true, searchByTopicCSS:true})
+
+				return res.render('landing', { messageCount: messageCount, user: userDetail, numberOfPosts: postCount, landingCSS: true, landing: true, searchByTopicCSS: true })
 			}
-		})	
+		})
 
 
 
@@ -52,28 +52,29 @@ module.exports = {
 	},
 
 	profile: (req, res) => {
-		db.fetchProfileDetails(req, (err,results) => {
+		db.fetchProfileDetails(req, (err, results) => {
 			if (err) throw err;
 			else {
-			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true, isPost:true  })
+				const postCount = req.session.postCount;
+				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
 			}
 		})
 	},
 
-	profilePosts:(req, res) => {
-		db.fetchProfileDetails(req, (err,results) => {
+	profilePosts: (req, res) => {
+		db.fetchProfileDetails(req, (err, results) => {
 			if (err) throw err;
 			else {
-			return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true, })
+				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, })
 			}
 		})
 	},
 
 	messaging: async (req, res) => {
 		return res.render('messaging', { messagingCSS: true });
-    },
+	},
 
-    conversation: (req, res) => {
-        return res.render('conversation', { conversationCSS: true });
-    }
+	conversation: (req, res) => {
+		return res.render('conversation', { conversationCSS: true });
+	}
 }

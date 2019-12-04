@@ -24,6 +24,10 @@ text-align: left;
     left: 100%;
 }
 
+#profile-actions-container a {
+  color: black;
+}
+
 #msg-btn {
     border-style: solid;
     border-radius: 5px;
