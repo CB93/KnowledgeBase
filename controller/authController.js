@@ -104,7 +104,6 @@ module.exports = {
 	},
 	
 	searchByTopic: (req, res) => {
-
 		
 		db.searchByTopic(req, (err,results) => {
 			let month = {
@@ -132,4 +131,17 @@ module.exports = {
 		
 	},
 
+    like: (req, res) => {
+        db.like(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+            return res.sendStatus(200);
+        });
+    },
+
+    getLikes: (req, res) => {
+        db.getLikes(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+            return res.json(results);
+        });
+    }
 }
