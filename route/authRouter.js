@@ -25,6 +25,7 @@ router.post("/post/reply", postController.postReply);
 router.post("/message", authorize, messageController.sendMessage);
 router.get("/conversations", authorize, messageController.getConversations);
 router.get("/message/:conversationId", authorize, messageController.getMessages);
+router.post("/sendEmail", authorize, messageController.sendEmail)
 module.exports = router;
 
 // Profile

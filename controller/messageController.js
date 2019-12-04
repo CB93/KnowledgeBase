@@ -1,4 +1,5 @@
 const db = require("../model/message")
+const emailService = require("../util/emailService")
 
 module.exports = {
     sendMessage: (req, res) => {
@@ -20,5 +21,14 @@ module.exports = {
             if (err) return res.sendStatus(500);
             return res.json(results);
         });
+    },
+
+    sendEmail: (req, res) => {
+        db.getEmailInformation(req, (err, results) => {
+            if (err) return res.sendStatus(500)
+            emailService.sendEmail(results)
+            return res.json(results)
+
+        })
     }
 }

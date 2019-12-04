@@ -22,7 +22,6 @@ module.exports = {
             req.session.userId = user[0].iduser;
 			req.session.token = token;
 			req.session.userDetails = user[0]
-			console.log(user[0].name)
 			return res.redirect('/landing')
 		})
 	},
@@ -86,7 +85,6 @@ module.exports = {
 				 Nov: '11', Dec : '12'
 			}
 			let data = results
-			console.log(results)
 			for(let i = 0; i < data.length; i++) {
 				let date = ''+data[i].date
 				

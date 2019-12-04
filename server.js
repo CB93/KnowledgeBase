@@ -20,7 +20,6 @@ io.on("connection", (socket) => {
     });
 
     socket.on("private-message", (data) => {
-        console.log(data);
         socket.broadcast.to(data.room).emit("private-message-retrieval", {
             text: data.message,
             firstname: data.user[0].firstname,

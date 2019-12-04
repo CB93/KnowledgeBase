@@ -46,5 +46,21 @@ module.exports = {
             const data = { convo: results, user: req.session.userId };
             callback(null, data);
         });
+    },
+
+    getEmailInformation: (req, callback) => {
+
+        const conversationId = req.body.conversation
+        req.con.query(`Select a.firstname AS senderFirst, a.lastname AS senderLast , b.firstname AS RecieverFirst, b.lastname AS RecieverLast, b.name AS SenderEmail, a.name AS RecieverEmail from conversations 
+        join user a on conversations.sender = a.iduser 
+        join user b on conversations.recipient = b.iduser
+        where conversations.id = ${conversationId};`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to fetch conversation data");
+            }
+            const data = { message: req.body.message, emailInfo: results }
+            callback(null, data)
+        })
     }
 };
