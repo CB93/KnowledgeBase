@@ -53,6 +53,9 @@ module.exports = {
 		db.fetchProfileDetails(req, (err, results) => {
 			if (err) throw err;
 			else {
+				if (results[0].iduser == req.session.userId) {
+					return res.redirect("/landing");
+			}
 				const postCount = req.session.postCount;
 				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
 			}
@@ -62,10 +65,7 @@ module.exports = {
 	profilePosts: (req, res) => {
 		db.fetchProfileDetails(req, (err, results) => {
 			if (err) throw err;
-            else {
-                if (results[0].iduser == req.session.userId) {
-                    return res.redirect("/landing");
-                }
+            else {  
 			    return res.render('userprofile', { user: results, userDetails:results[0], userprofileCSS: true })
 			}
 		})
