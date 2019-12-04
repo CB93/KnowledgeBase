@@ -9,20 +9,18 @@ module.exports = {
 		db.getUserDetails(req, (err, userDetails) => {
 			if (err) throw err;
 			else {
-	        	db.countUserPosts(req, (err, results) => {
-	        		if (err) throw err;
-                    else {
-                        req.session.postCount = results[0].n
-        				req.session.userDetails = userDetails[0]
-                        userDetail = userDetails[0]
-                        console.log(userDetail);
-	        		}
-	        	});
-
+	        		req.session.userDetails = userDetails[0]
+				userDetail = userDetails[0]
 				// return res.render('landing', { user: userDetail, landingCSS: true , landing: true, searchByTopicCSS:true})
 			}
 		})
-
+		
+		db.countUserPosts(req, (err, results) => {
+			if (err) throw err;
+			else {
+				req.session.postCount = results[0].n
+			}
+       		 })
 
 
 		db.countUserMessages(req, (err, results) => {
@@ -57,10 +55,21 @@ module.exports = {
             else {
                 if (results[0].iduser == req.session.userId) {
                     return res.redirect("/landing");
-                }
+                }		
+		    		req.session.userDetails = results[0]
 				const postCount = req.session.postCount;
-				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
-			}
+//				return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
+            }
+			db.countUserPosts(req, (err, results) => {
+				if (err) throw err;
+				else {
+					
+					const postCount = results[0].n
+					console.log("results[0] ",results[0])
+
+					return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
+				}
+			})
 		})
 	},
 
