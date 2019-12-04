@@ -37,5 +37,9 @@ module.exports = {
 
 	messaging: async (req, res) => {
 		return res.render('messaging', { messagingCSS: true });
-	}
+    },
+
+    conversation: (req, res) => {
+        return res.render('conversation', { conversationCSS: true });
+    }
 }

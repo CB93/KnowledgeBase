@@ -23,12 +23,19 @@ module.exports = {
         });
     },
 
+    createConversation: (req, res) => {
+        db.createConversation(req, (err, results) => {
+            if (err) return res.sendStatus(500);
+        });
+        return res.status(200).redirect("/messaging");
+    },
+  
     sendEmail: (req, res) => {
         db.getEmailInformation(req, (err, results) => {
             if (err) return res.sendStatus(500)
             emailService.sendEmail(results)
             return res.json(results)
 
-        })
+        });
     }
 }

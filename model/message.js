@@ -48,6 +48,33 @@ module.exports = {
         });
     },
 
+    createConversation: (req, callback) => {
+        const userId = req.session.userId;
+        const recipient = req.body.recipient;
+        const message = req.body.message;
+
+        req.con.query(`select * from conversations where 
+        (conversations.sender = ${userId} and conversations.recipient = ${recipient}) 
+        or (conversations.sender = ${recipient} and conversations.recipient = ${userId})`, (err, results) => {
+            if (err) {
+                console.log(err);
+                callback("Unable to create conversation.");
+            }
+
+            if (results.length == 0) {
+                req.con.query(`insert into conversations (sender, recipient) values("${userId}", "${recipient}")`, (err) => {
+                    if (err) {
+                        console.log(err);
+                        callback("Unable to create conversation");
+                    }
+                    req.con.query(`select id from conversations order by id desc limit 1`, (err, convo) => {
+                         req.con.query(`INSERT INTO messages (text, sender, conversation) VALUES ("${message}", "${userId}", "${convo[0].id}")`)
+                    });
+                });
+            }
+        });
+    },
+  
     getEmailInformation: (req, callback) => {
 
         const conversationId = req.body.conversation

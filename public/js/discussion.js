@@ -1,4 +1,6 @@
 const latestPostContainer = document.getElementById("latest-post-container");
+const page = window.location.href;
+const user = page.split("/")[page.split("/").length - 1];
 
 renderPosts = async (url) => {
     while (latestPostContainer.firstChild)
@@ -176,11 +178,28 @@ createReply = async (post, content) => {
     }
 };
 
-const page = window.location.href;
+messageUser = async () => {
+    window.location.href = `http://localhost:3000/conversation/user/${user}`;
+}
+
+createConversation = async () => {
+    const response = await fetch("http://localhost:3000/conversations", {
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ recipient: user, message: document.getElementById("post-box").value})
+    });
+    
+    document.getElementById("post-box").value = "";
+    window.location.href = response.url;
+}
+
 
 if (page.split("/")[page.split("/").length - 1] == "landing") {
     renderPosts("http://localhost:3000/post/0");
 } else {
-    const user = page.split("/")[page.split("/").length - 1];
     renderPosts(`http://localhost:3000/post/user/${user}`);
 }
