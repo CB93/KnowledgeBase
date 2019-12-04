@@ -15,8 +15,7 @@ module.exports = {
 
 	fetchProfileDetails: (req, callback) => {
 		const userId = req.params.id 
-		req.con.query(`SELECT * FROM user JOIN posts on posts.creator = user.iduser
-		WHERE iduser=?`, [userId], (err, results) => {
+		req.con.query(`SELECT * FROM user WHERE iduser=?`, [userId], (err, results) => {
 			console.log(results)
 			if (err) {
 				callback(Error('Error from Database'))
