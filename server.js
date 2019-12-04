@@ -58,4 +58,4 @@ app.use(loginRouter);
 app.use(appRouter)
 app.use(express.static(__dirname + '/public'));
 
-app.listen(process.env.PORT || 3000, () => console.log('Server ready'))
+app.listen(process.env.SERVER_PORT || 3000, () => console.log('Server ready'))
