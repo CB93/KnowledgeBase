@@ -68,7 +68,7 @@ module.exports = {
 					const postCount = results[0].n
 					console.log("results[0] ",results[0])
 
-					return res.render('userprofile', { user: results, userDetails: results[0], userprofileCSS: true, isPost: true, postCount: postCount })
+					return res.render('userprofile', { user: results, userDetails: req.session.userDetails, userprofileCSS: true, isPost: true, postCount: postCount })
 				}
 			})
 		})
